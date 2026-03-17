@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,16 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
 import caonguyen.vu.shared.models.DeviceConfig
 import caonguyen.vu.shared.models.DeviceStatus
 import caonguyen.vu.shared.models.SensorData
 import caonguyen.vu.ui.IoTPrimary
 import caonguyen.vu.ui.IoTSecondary
 import caonguyen.vu.ui.IoTSurface
-import cafe.adriel.voyager.koin.koinScreenModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import org.koin.compose.koinInject
 
 class DashboardScreen : Screen {
@@ -54,13 +52,93 @@ class DashboardScreen : Screen {
         Scaffold(
             snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
         ) { innerPadding ->
-            Column(
+            BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background)
                     .padding(innerPadding)
-                    .padding(24.dp)
             ) {
+                val isMobile = maxWidth < 800.dp
+                
+                if (isMobile) {
+                    // Mobile Layout: Single Column, Scrollable
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp)
+                            .verticalScroll(rememberScrollState()),
+                        verticalArrangement = Arrangement.spacedBy(24.dp)
+                    ) {
+                        HeaderSection()
+                        
+                        Text(
+                            "RS485 Network",
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(bottom = 0.dp)
+                        )
+                        // Using a simple Column loop instead of LazyGrid to allow scrolling safely in a scrollable parent
+                        devices.filter { it.deviceId.startsWith("MOCK") || it.deviceId.startsWith("NODE") }.forEach { device ->
+                            DeviceCard(device, sensorDataMap[device.deviceId])
+                        }
+                        
+                        Text(
+                            "NodeMCU Direct Control",
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(bottom = 0.dp)
+                        )
+                        EspControlCard(viewModel, isMobile = true)
+                    }
+                } else {
+                    // Desktop Layout: Two Columns, Grid System
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(24.dp)
+                    ) {
+                        HeaderSection()
+                        
+                        Row(modifier = Modifier.fillMaxSize().weight(1f), horizontalArrangement = Arrangement.spacedBy(24.dp)) {
+                            // Left Column: RS485 Devices
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    "RS485 Network",
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    fontWeight = FontWeight.Bold,
+                                    modifier = Modifier.padding(bottom = 16.dp)
+                                )
+                                LazyVerticalGrid(
+                                    columns = GridCells.Adaptive(300.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                                ) {
+                                    items(devices.filter { it.deviceId.startsWith("MOCK") || it.deviceId.startsWith("NODE") }) { device ->
+                                        DeviceCard(device, sensorDataMap[device.deviceId])
+                                    }
+                                }
+                            }
+                            
+                            // Right Column: NodeMCU Direct Control
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    "NodeMCU Direct Control",
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    fontWeight = FontWeight.Bold,
+                                    modifier = Modifier.padding(bottom = 16.dp)
+                                )
+                                EspControlCard(viewModel, isMobile = false)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun HeaderSection() {
+        Column {
             Text(
                 "IoT Ecosystem",
                 color = IoTPrimary,
@@ -68,58 +146,29 @@ class DashboardScreen : Screen {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            
             Text(
                 "Live System Overview",
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 16.sp,
-                modifier = Modifier.padding(bottom = 24.dp)
+                modifier = Modifier.padding(bottom = 0.dp)
             )
-
-            // Split the screen into two halves roughly
-            Row(modifier = Modifier.fillMaxSize().weight(1f), horizontalArrangement = Arrangement.spacedBy(24.dp)) {
-                // Left Column: RS485 Devices
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        "RS485 Network",
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-                    LazyVerticalGrid(
-                        columns = GridCells.Adaptive(300.dp),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        items(devices.filter { it.deviceId.startsWith("MOCK") || it.deviceId.startsWith("NODE") }) { device ->
-                            DeviceCard(device, sensorDataMap[device.deviceId])
-                        }
-                    }
-                }
-                
-                // Right Column: NodeMCU Direct Control
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        "NodeMCU Direct Control",
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-                    EspControlCard(viewModel)
-                }
-            }
-        }
         }
     }
-    
+
     @Composable
-    fun EspControlCard(viewModel: DashboardViewModel) {
+    fun EspControlCard(viewModel: DashboardViewModel, isMobile: Boolean) {
         val espPins by viewModel.espPins.collectAsState()
+        
+        val modifier = if (isMobile) {
+            Modifier.fillMaxWidth().wrapContentHeight()
+        } else {
+            Modifier.fillMaxWidth().fillMaxHeight()
+        }
         
         Card(
             colors = CardDefaults.cardColors(containerColor = IoTSurface),
             shape = RoundedCornerShape(16.dp),
-            modifier = Modifier.fillMaxWidth().fillMaxHeight()
+            modifier = modifier
         ) {
             Column(modifier = Modifier.padding(24.dp).fillMaxSize()) {
                 Text("ESP8266 GPIO Map", color = IoTPrimary, fontWeight = FontWeight.Bold, fontSize = 20.sp)
@@ -144,31 +193,60 @@ class DashboardScreen : Screen {
                 Spacer(modifier = Modifier.height(8.dp))
                 
                 // Digital Switches
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(3),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    items(espPins.filter { !it.isAnalog }) { pin ->
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-                            shape = RoundedCornerShape(8.dp)
-                        ) {
+                val cols = if (isMobile) 2 else 3
+                
+                if (isMobile) {
+                    // Mobile: manual row layout to avoid internal lazy crashes inside vertical scroll
+                    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        val chunkedPins = espPins.filter { !it.isAnalog }.chunked(cols)
+                        chunkedPins.forEach { rowPins ->
                             Row(
-                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(16.dp)
                             ) {
-                                Text(pin.pin, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
-                                Switch(
-                                    checked = pin.value > 0.5,
-                                    onCheckedChange = { viewModel.toggleDigitalPin(pin.pin, it) },
-                                    colors = SwitchDefaults.colors(checkedThumbColor = IoTPrimary, checkedTrackColor = IoTPrimary.copy(alpha = 0.5f))
-                                )
+                                rowPins.forEach { pin ->
+                                    PinSwitchCard(pin, viewModel, Modifier.weight(1f))
+                                }
+                                val emptyCols = cols - rowPins.size
+                                repeat(emptyCols) {
+                                    Spacer(modifier = Modifier.weight(1f))
+                                }
                             }
                         }
                     }
+                } else {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(cols),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        items(espPins.filter { !it.isAnalog }) { pin ->
+                            PinSwitchCard(pin, viewModel, Modifier)
+                        }
+                    }
                 }
+            }
+        }
+    }
+
+    @Composable
+    fun PinSwitchCard(pin: caonguyen.vu.shared.models.EspPinState, viewModel: DashboardViewModel, modifier: Modifier = Modifier) {
+        Card(
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+            shape = RoundedCornerShape(8.dp),
+            modifier = modifier
+        ) {
+            Row(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+            ) {
+                Text(pin.pin, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
+                Switch(
+                    checked = pin.value > 0.5,
+                    onCheckedChange = { viewModel.toggleDigitalPin(pin.pin, it) },
+                    colors = SwitchDefaults.colors(checkedThumbColor = IoTPrimary, checkedTrackColor = IoTPrimary.copy(alpha = 0.5f))
+                )
             }
         }
     }
