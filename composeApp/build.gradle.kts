@@ -45,6 +45,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.clientOkhttp)
         }
         commonMain.dependencies {
             implementation(libs.koin.core)
@@ -68,6 +69,17 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation(libs.ktor.clientOkhttp)
+        }
+        val iosArm64Main by getting {
+            dependencies {
+                implementation(libs.ktor.clientDarwin)
+            }
+        }
+        val iosSimulatorArm64Main by getting {
+            dependencies {
+                implementation(libs.ktor.clientDarwin)
+            }
         }
     }
 }
