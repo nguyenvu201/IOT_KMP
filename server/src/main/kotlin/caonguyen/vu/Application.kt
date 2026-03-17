@@ -63,7 +63,7 @@ fun Application.module() {
 
     install(WebSockets) {
         pingPeriodMillis = 15000
-        timeoutMillis = 15000
+        timeoutMillis = 45000
         maxFrameSize = Long.MAX_VALUE
         masking = false
     }

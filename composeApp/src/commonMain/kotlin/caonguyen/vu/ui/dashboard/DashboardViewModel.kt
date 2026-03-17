@@ -39,7 +39,7 @@ class DashboardViewModel : ViewModel() {
     // Lazy HttpClient inside ViewModel for now to avoid restructuring Koin 
     private val client = io.ktor.client.HttpClient {
         install(WebSockets) {
-            pingIntervalMillis = 20_000L
+            pingIntervalMillis = 10_000L
         }
     }
     private var wsSession: DefaultClientWebSocketSession? = null
@@ -142,36 +142,38 @@ class DashboardViewModel : ViewModel() {
         }
     }
     
-    fun setAnalogPin(pinName: String, newValue: Double) {
-        println("ViewModel: Set Analog $pinName to $newValue")
+    fun setAnalogPin(pinName: String, newValue: Double, publishToMqtt: Boolean = true) {
+        println("ViewModel: Set Analog $pinName to $newValue (publish: $publishToMqtt)")
         val state = caonguyen.vu.shared.models.EspPinState(pinName, isAnalog = true, value = newValue)
         _espPins.value = _espPins.value.map {
             if (it.pin == pinName) state else it
         }
         
-        viewModelScope.launch {
-            try {
-                val session = wsSession
-                if (session == null || !session.isActive) {
-                    _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "WebSocket is not connected to Server"))
-                    return@launch
-                }
-                
-                val ackDeferred = async {
-                    withTimeoutOrNull(5000) {
-                        actionAcks.first { it.target == pinName }
+        if (publishToMqtt) {
+            viewModelScope.launch {
+                try {
+                    val session = wsSession
+                    if (session == null || !session.isActive) {
+                        _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "WebSocket is not connected to Server"))
+                        return@launch
                     }
+                    
+                    val ackDeferred = async {
+                        withTimeoutOrNull(5000) {
+                            actionAcks.first { it.target == pinName }
+                        }
+                    }
+                    
+                    session.send(Frame.Text(Json.encodeToString(state)))
+                    
+                    val ack = ackDeferred.await()
+                    if (ack == null) {
+                        _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "Request timed out after 5 seconds"))
+                    }
+                } catch(e: Exception) {
+                    println("Failed to publish analog update: ${e.message}")
+                    _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "Error: ${e.message}"))
                 }
-                
-                session.send(Frame.Text(Json.encodeToString(state)))
-                
-                val ack = ackDeferred.await()
-                if (ack == null) {
-                    _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "Request timed out after 5 seconds"))
-                }
-            } catch(e: Exception) {
-                println("Failed to publish analog update: ${e.message}")
-                _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "Error: ${e.message}"))
             }
         }
     }

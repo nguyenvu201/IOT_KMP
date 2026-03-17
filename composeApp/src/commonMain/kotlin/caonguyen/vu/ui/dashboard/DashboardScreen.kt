@@ -41,11 +41,13 @@ class DashboardScreen : Screen {
 
         LaunchedEffect(Unit) {
             viewModel.actionAcks.collect { ack ->
-                val icon = if (ack.isSuccess) "✅" else "❌"
-                snackbarHostState.showSnackbar(
-                    message = "$icon ${ack.message ?: "Action completed for ${ack.target}"}",
-                    withDismissAction = true
-                )
+                if (!ack.isSuccess) {
+                    val icon = "❌"
+                    snackbarHostState.showSnackbar(
+                        message = "$icon ${ack.message ?: "Action failed for ${ack.target}"}",
+                        withDismissAction = true
+                    )
+                }
             }
         }
 
@@ -130,7 +132,8 @@ class DashboardScreen : Screen {
                     Text("${analogPin.value.toInt()} / 1024", color = IoTPrimary, fontSize = 24.sp, fontWeight = FontWeight.Light)
                     Slider(
                         value = analogPin.value.toFloat(),
-                        onValueChange = { viewModel.setAnalogPin(analogPin.pin, it.toDouble()) },
+                        onValueChange = { viewModel.setAnalogPin(analogPin.pin, it.toDouble(), publishToMqtt = false) },
+                        onValueChangeFinished = { viewModel.setAnalogPin(analogPin.pin, analogPin.value, publishToMqtt = true) },
                         valueRange = 0f..1024f,
                         colors = SliderDefaults.colors(thumbColor = IoTPrimary, activeTrackColor = IoTPrimary)
                     )
