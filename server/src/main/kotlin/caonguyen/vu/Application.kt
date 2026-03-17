@@ -22,6 +22,9 @@ fun main() {
 
 fun Application.module() {
     
+    // Initialize Database Connection Pool first
+    caonguyen.vu.server.database.DatabaseFactory.init()
+
     val mqttGateway = MqttGateway()
     val rs485Service = RS485Service()
     

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: iot_postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: kmp_iot_user
+      POSTGRES_PASSWORD: kmp_iot_password
+      POSTGRES_DB: kmp_iot_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

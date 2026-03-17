@@ -8,6 +8,9 @@ import kotlinx.serialization.json.Json
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import org.jetbrains.exposed.sql.insert
 import java.util.UUID
 
 class MqttGateway {
@@ -49,6 +52,23 @@ class MqttGateway {
                     val payload = String(publish.payloadAsBytes)
                     val state = Json.decodeFromString<caonguyen.vu.shared.models.EspPinState>(payload)
                     _espStatusFlow.tryEmit(state)
+                    
+                    // LƯU DB: Lưu tự động vào PostgreSQL
+                    kotlinx.coroutines.CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                            caonguyen.vu.server.database.DatabaseFactory.dbQuery {
+                                caonguyen.vu.server.database.SensorDataTable.insert {
+                                    it[pin] = state.pin
+                                    it[isAnalog] = state.isAnalog
+                                    it[value] = state.value
+                                    it[recordedAt] = kotlinx.datetime.Clock.System.now()
+                                }
+                            }
+                            println("Database: Đã lưu dữ liệu chân ${state.pin} với giá trị ${state.value} xuống PostgreSQL!")
+                        } catch (e: Exception) {
+                            println("Database Lỗi: Không thể lưu xuống DB - ${e.message}")
+                        }
+                    }
                 } catch(e: Exception) {
                     println("Failed to decode ESP status payload: ${e.message}")
                 }

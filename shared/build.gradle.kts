@@ -61,8 +61,8 @@ android {
 
 buildkonfig {
     packageName = "caonguyen.vu.shared.buildconfig"
-    exposeObjectWithName = "BuildKonfig"
-    
+    // Do not use exposeObjectWithName here to avoid @JsExport crash on WasmJS
+    objectName = "BuildKonfigInternal"
     defaultConfigs {
         // Here we define the global constants
         // To run easily on Desktop/Simulator, use "127.0.0.1". 
