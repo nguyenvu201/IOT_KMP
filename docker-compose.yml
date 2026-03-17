@@ -14,5 +14,28 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt_broker
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      
+  ktor-server:
+    build: .
+    container_name: iot_ktor_server
+    restart: always
+    ports:
+      - "8085:8085"
+    depends_on:
+      - db
+      - mosquitto
+    environment:
+      - MQTT_BROKER_HOST=mqtt_broker
+      - DATABASE_URL=jdbc:postgresql://iot_postgres_db:5432/kmp_iot_db
+
 volumes:
   postgres_data:

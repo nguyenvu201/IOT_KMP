@@ -11,7 +11,8 @@ import org.jetbrains.exposed.sql.transactions.transaction
 object DatabaseFactory {
     fun init() {
         val driverClassName = "org.postgresql.Driver"
-        val jdbcURL = "jdbc:postgresql://127.0.0.1:5432/kmp_iot_db"
+        // Try getting JDBC url from Environment Variables first (for Docker Compose), fallback to localhost
+        val jdbcURL = System.getenv("DATABASE_URL") ?: "jdbc:postgresql://127.0.0.1:5432/kmp_iot_db"
         val database = Database.connect(hikari(jdbcURL, driverClassName))
         
         // Create tables automatically

@@ -28,8 +28,9 @@ fun Application.module() {
     val mqttGateway = MqttGateway()
     val rs485Service = RS485Service()
     
-    // Connect to MQTT broker based on config
-    mqttGateway.connect(caonguyen.vu.shared.buildconfig.BuildKonfig.MQTT_BROKER_HOST, 1883)
+    // Connect to MQTT broker based on config (Docker injects this)
+    val mqttHost = System.getenv("MQTT_BROKER_HOST") ?: caonguyen.vu.shared.buildconfig.BuildKonfig.MQTT_BROKER_HOST
+    mqttGateway.connect(mqttHost, 1883)
     mqttGateway.subscribeToEspStatus()
     
     // We start listening to the mocked RS485 port.
