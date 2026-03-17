@@ -57,7 +57,7 @@ class DashboardViewModel : ViewModel() {
                 // IMPORTANT: If running on Android Emulator, use "10.0.2.2". 
                 // If running on Desktop or iOS Simulator, use "127.0.0.1" or "localhost".
                 // If running on a physical phone, use your computer's local Wi-Fi IP (e.g., "192.168.1.X").
-                val serverHost = "192.168.1.104" // <-- Đặt cứng IP Wi-Fi của máy Mac để chạy được trên mọi Simulator/Emulator
+                val serverHost = caonguyen.vu.shared.buildconfig.BuildKonfig.WEBSOCKET_HOST
                 
                 println("App: Bắt đầu kết nối đến ws://$serverHost:8085/ws/esp8266")
                 client.webSocket(method = io.ktor.http.HttpMethod.Get, host = serverHost, port = 8085, path = "/ws/esp8266") {

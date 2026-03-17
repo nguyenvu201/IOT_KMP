@@ -43,7 +43,7 @@ class MqttGateway {
         if (!this::client.isInitialized) return
         
         client.subscribeWith()
-            .topicFilter("iot/esp8266/+/status")
+            .topicFilter(caonguyen.vu.shared.buildconfig.BuildKonfig.MQTT_STATUS_TOPIC_FILTER)
             .callback { publish ->
                 try {
                     val payload = String(publish.payloadAsBytes)
@@ -58,7 +58,7 @@ class MqttGateway {
                 if (exception != null) {
                     println("Failed to subscribe to ESP status: ${exception.message}")
                 } else {
-                    println("MQTT Gateway: Subscribed to iot/esp8266/+/status")
+                    println("MQTT Gateway: Subscribed to ${caonguyen.vu.shared.buildconfig.BuildKonfig.MQTT_STATUS_TOPIC_FILTER}")
                 }
             }
     }
@@ -87,7 +87,7 @@ class MqttGateway {
         }
         
         val payload = Json.encodeToString(state).toByteArray()
-        val topic = "iot/esp8266/node-1/cmd"
+        val topic = caonguyen.vu.shared.buildconfig.BuildKonfig.MQTT_CMD_TOPIC
         
         println("MQTT Gateway: Attempting to publish to topic '$topic' payload: ${Json.encodeToString(state)}")
         

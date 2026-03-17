@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -55,5 +56,23 @@ android {
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+}
+
+buildkonfig {
+    packageName = "caonguyen.vu.shared.buildconfig"
+    exposeObjectWithName = "BuildKonfig"
+    
+    defaultConfigs {
+        // Here we define the global constants
+        // To run easily on Desktop/Simulator, use "127.0.0.1". 
+        // For Android Emulator, use "10.0.2.2".
+        // For physical device, use Wi-Fi IP (e.g., "192.168.1.104")
+        buildConfigField(com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING, "MQTT_BROKER_HOST", "127.0.0.1")
+        buildConfigField(com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING, "WEBSOCKET_HOST", "192.168.1.104")
+        
+        // MQTT Topic defaults
+        buildConfigField(com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING, "MQTT_CMD_TOPIC", "iot/esp8266/node-1/cmd")
+        buildConfigField(com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING, "MQTT_STATUS_TOPIC_FILTER", "iot/esp8266/+/status")
     }
 }
