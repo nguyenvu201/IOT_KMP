@@ -26,6 +26,9 @@ kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
+        compilerOptions {
+            freeCompilerArgs.add("-Xklib-duplicated-unique-name-strategy=allow-all-with-warning")
+        }
     }
     
     sourceSets {

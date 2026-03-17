@@ -8,8 +8,10 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,12 +37,28 @@ class DashboardScreen : Screen {
         val devices by viewModel.devices.collectAsState()
         val sensorDataMap by viewModel.sensorDataMap.collectAsState()
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(24.dp)
-        ) {
+        val snackbarHostState = remember { SnackbarHostState() }
+
+        LaunchedEffect(Unit) {
+            viewModel.actionAcks.collect { ack ->
+                val icon = if (ack.isSuccess) "✅" else "❌"
+                snackbarHostState.showSnackbar(
+                    message = "$icon ${ack.message ?: "Action completed for ${ack.target}"}",
+                    withDismissAction = true
+                )
+            }
+        }
+
+        Scaffold(
+            snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(innerPadding)
+                    .padding(24.dp)
+            ) {
             Text(
                 "IoT Ecosystem",
                 color = IoTPrimary,
@@ -88,6 +106,7 @@ class DashboardScreen : Screen {
                     EspControlCard(viewModel)
                 }
             }
+        }
         }
     }
     

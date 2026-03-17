@@ -8,7 +8,13 @@ import caonguyen.vu.shared.models.SensorData
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withTimeoutOrNull
 import io.ktor.client.plugins.websocket.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.channels.consumeEach
@@ -26,6 +32,9 @@ class DashboardViewModel : ViewModel() {
 
     private val _espPins = MutableStateFlow<List<caonguyen.vu.shared.models.EspPinState>>(emptyList())
     val espPins = _espPins.asStateFlow()
+
+    private val _actionAcks = MutableSharedFlow<caonguyen.vu.shared.models.ActionAck>()
+    val actionAcks = _actionAcks.asSharedFlow()
     
     // Lazy HttpClient inside ViewModel for now to avoid restructuring Koin 
     private val client = io.ktor.client.HttpClient {
@@ -45,23 +54,37 @@ class DashboardViewModel : ViewModel() {
     private fun connectWebSockets() {
         viewModelScope.launch {
             try {
-                // Change to actual PC IP later for phone testing. Using localhost for desktop test.
-                client.webSocket(method = io.ktor.http.HttpMethod.Get, host = "localhost", port = 8085, path = "/ws/esp8266") {
+                // IMPORTANT: If running on Android Emulator, use "10.0.2.2". 
+                // If running on Desktop or iOS Simulator, use "127.0.0.1" or "localhost".
+                // If running on a physical phone, use your computer's local Wi-Fi IP (e.g., "192.168.1.X").
+                val serverHost = "192.168.1.104" // <-- Đặt cứng IP Wi-Fi của máy Mac để chạy được trên mọi Simulator/Emulator
+                
+                println("App: Bắt đầu kết nối đến ws://$serverHost:8085/ws/esp8266")
+                client.webSocket(method = io.ktor.http.HttpMethod.Get, host = serverHost, port = 8085, path = "/ws/esp8266") {
                     wsSession = this
-                    println("App WebSocket Connected to Server!")
+                    println("App WebSocket Connected to Server at $serverHost:8085!")
                     
                     try {
                         incoming.consumeEach { frame ->
                             if (frame is Frame.Text) {
                                 val text = frame.readText()
-                                try {
-                                    val state = kotlinx.serialization.json.Json.decodeFromString<caonguyen.vu.shared.models.EspPinState>(text)
-                                    // Update StateFlow
-                                    _espPins.value = _espPins.value.map {
-                                        if (it.pin == state.pin) state else it
+                                if (text.contains("\"actionType\"")) {
+                                    try {
+                                        val ack = kotlinx.serialization.json.Json.decodeFromString<caonguyen.vu.shared.models.ActionAck>(text)
+                                        _actionAcks.emit(ack)
+                                    } catch(e: Exception) {
+                                        println("Invalid ack payload: $text")
                                     }
-                                } catch(e: Exception) {
-                                    println("Invalid state payload: $text")
+                                } else {
+                                    try {
+                                        val state = kotlinx.serialization.json.Json.decodeFromString<caonguyen.vu.shared.models.EspPinState>(text)
+                                        // Update StateFlow
+                                        _espPins.value = _espPins.value.map {
+                                            if (it.pin == state.pin) state else it
+                                        }
+                                    } catch(e: Exception) {
+                                        println("Invalid state payload: $text")
+                                    }
                                 }
                             }
                         }
@@ -71,6 +94,7 @@ class DashboardViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 println("Failed to connect to Websocket Gateway: ${e.message}")
+                e.printStackTrace()
             }
         }
     }
@@ -93,9 +117,27 @@ class DashboardViewModel : ViewModel() {
         
         viewModelScope.launch {
             try {
-                wsSession?.send(Frame.Text(Json.encodeToString(state)))
+                val session = wsSession
+                if (session == null || !session.isActive) {
+                    _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "WebSocket is not connected to Server"))
+                    return@launch
+                }
+                
+                val ackDeferred = async {
+                    withTimeoutOrNull(5000) {
+                        actionAcks.first { it.target == pinName }
+                    }
+                }
+                
+                session.send(Frame.Text(Json.encodeToString(state)))
+                
+                val ack = ackDeferred.await()
+                if (ack == null) {
+                    _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "Request timed out after 5 seconds"))
+                }
             } catch(e: Exception) {
                 println("Failed to publish pin update: ${e.message}")
+                _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "Error: ${e.message}"))
             }
         }
     }
@@ -109,9 +151,27 @@ class DashboardViewModel : ViewModel() {
         
         viewModelScope.launch {
             try {
-                wsSession?.send(Frame.Text(Json.encodeToString(state)))
+                val session = wsSession
+                if (session == null || !session.isActive) {
+                    _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "WebSocket is not connected to Server"))
+                    return@launch
+                }
+                
+                val ackDeferred = async {
+                    withTimeoutOrNull(5000) {
+                        actionAcks.first { it.target == pinName }
+                    }
+                }
+                
+                session.send(Frame.Text(Json.encodeToString(state)))
+                
+                val ack = ackDeferred.await()
+                if (ack == null) {
+                    _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "Request timed out after 5 seconds"))
+                }
             } catch(e: Exception) {
                 println("Failed to publish analog update: ${e.message}")
+                _actionAcks.emit(caonguyen.vu.shared.models.ActionAck("MQTT_PUBLISH", pinName, false, "Error: ${e.message}"))
             }
         }
     }

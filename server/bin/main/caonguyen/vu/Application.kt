@@ -25,8 +25,8 @@ fun Application.module() {
     val mqttGateway = MqttGateway()
     val rs485Service = RS485Service()
     
-    // Connect to local Mosquitto or public broker for testing
-    mqttGateway.connect("broker.hivemq.com", 1883)
+    // Connect to local Mosquitto broker
+    mqttGateway.connect("127.0.0.1", 1883)
     mqttGateway.subscribeToEspStatus()
     
     // We start listening to the mocked RS485 port.
@@ -87,9 +87,21 @@ fun Application.module() {
                 incoming.consumeEach { frame ->
                     if (frame is Frame.Text) {
                         val payload = frame.readText()
+                        println("Server WebSocket received text payload: $payload")
                         try {
                             val state = kotlinx.serialization.json.Json.decodeFromString<caonguyen.vu.shared.models.EspPinState>(payload)
-                            mqttGateway.publishEspCommand(state)
+                            println("Server checking MQTT Gateway to publish command for ${state.pin}...")
+                            mqttGateway.publishEspCommand(state) { isSuccess, error ->
+                                launch {
+                                    val ack = caonguyen.vu.shared.models.ActionAck(
+                                        actionType = "MQTT_PUBLISH",
+                                        target = state.pin,
+                                        isSuccess = isSuccess,
+                                        message = if (isSuccess) "Successfully updated ${state.pin}" else error
+                                    )
+                                    send(kotlinx.serialization.json.Json.encodeToString(ack))
+                                }
+                            }
                         } catch(e: Exception) {
                             println("Invalid WS payload: $payload")
                         }

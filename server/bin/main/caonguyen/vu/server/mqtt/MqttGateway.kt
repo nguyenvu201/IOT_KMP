@@ -80,11 +80,16 @@ class MqttGateway {
             }
     }
 
-    fun publishEspCommand(state: caonguyen.vu.shared.models.EspPinState) {
-        if (!this::client.isInitialized) return
+    fun publishEspCommand(state: caonguyen.vu.shared.models.EspPinState, onComplete: ((Boolean, String?) -> Unit)? = null) {
+        if (!this::client.isInitialized) {
+            onComplete?.invoke(false, "MQTT Client not initialized")
+            return
+        }
         
         val payload = Json.encodeToString(state).toByteArray()
         val topic = "iot/esp8266/node-1/cmd"
+        
+        println("MQTT Gateway: Attempting to publish to topic '$topic' payload: ${Json.encodeToString(state)}")
         
         client.publishWith()
             .topic(topic)
@@ -92,7 +97,11 @@ class MqttGateway {
             .send()
             .whenComplete { _, exception ->
                 if (exception != null) {
-                    println("Failed to publish EspPinState: ${exception.message}")
+                    println("MQTT Gateway: Failed to publish EspPinState: ${exception.message}")
+                    onComplete?.invoke(false, exception.message)
+                } else {
+                    println("MQTT Gateway: Successfully published EspPinState to topic '$topic'")
+                    onComplete?.invoke(true, null)
                 }
             }
     }
