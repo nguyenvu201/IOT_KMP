@@ -24,6 +24,9 @@ dependencies {
     implementation(libs.ktor.serverCore)
     implementation(libs.ktor.serverNetty)
     implementation(libs.ktor.serverWebsockets)
+    implementation(libs.ktor.serverAuth)
+    implementation(libs.ktor.serverAuthJwt)
+    implementation(libs.ktor.serverCors)
     
     // Database
     implementation(libs.exposed.core)

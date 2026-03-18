@@ -7,6 +7,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import caonguyen.vu.di.allModules
 import caonguyen.vu.ui.IoTDarkColors
+import caonguyen.vu.ui.auth.LoginScreen
 import caonguyen.vu.ui.dashboard.DashboardScreen
 import org.koin.compose.KoinApplication
 
@@ -17,7 +18,7 @@ fun App() {
         modules(allModules)
     }) {
         MaterialTheme(colorScheme = IoTDarkColors) {
-            Navigator(DashboardScreen()) { navigator ->
+            Navigator(LoginScreen()) { navigator ->
                 SlideTransition(navigator)
             }
         }

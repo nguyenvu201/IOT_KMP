@@ -58,9 +58,11 @@ class DashboardViewModel : ViewModel() {
                 // If running on Desktop or iOS Simulator, use "127.0.0.1" or "localhost".
                 // If running on a physical phone, use your computer's local Wi-Fi IP (e.g., "192.168.1.X").
                 val serverHost = caonguyen.vu.shared.buildconfig.BuildKonfig.WEBSOCKET_HOST
+                val token = caonguyen.vu.ui.auth.AuthState.token ?: ""
+                val wsPath = if (token.isNotEmpty()) "/ws/esp8266?token=$token" else "/ws/esp8266"
                 
-                println("App: Bắt đầu kết nối đến ws://$serverHost:8085/ws/esp8266")
-                client.webSocket(method = io.ktor.http.HttpMethod.Get, host = serverHost, port = 8085, path = "/ws/esp8266") {
+                println("App: Bắt đầu kết nối đến ws://$serverHost:8085$wsPath")
+                client.webSocket(method = io.ktor.http.HttpMethod.Get, host = serverHost, port = 8085, path = wsPath) {
                     wsSession = this
                     println("App WebSocket Connected to Server at $serverHost:8085!")
                     
