@@ -35,6 +35,7 @@ class DashboardScreen : Screen {
         val devices by viewModel.devices.collectAsState()
         val sensorDataMap by viewModel.sensorDataMap.collectAsState()
 
+        val navigator = cafe.adriel.voyager.navigator.LocalNavigator.current
         val snackbarHostState = remember { SnackbarHostState() }
 
         LaunchedEffect(Unit) {
@@ -69,7 +70,7 @@ class DashboardScreen : Screen {
                             .verticalScroll(rememberScrollState()),
                         verticalArrangement = Arrangement.spacedBy(24.dp)
                     ) {
-                        HeaderSection()
+                        HeaderSection(navigator)
                         
                         Text(
                             "RS485 Network",
@@ -97,7 +98,7 @@ class DashboardScreen : Screen {
                             .fillMaxSize()
                             .padding(24.dp)
                     ) {
-                        HeaderSection()
+                        HeaderSection(navigator)
                         
                         Row(modifier = Modifier.fillMaxSize().weight(1f), horizontalArrangement = Arrangement.spacedBy(24.dp)) {
                             // Left Column: RS485 Devices
@@ -137,21 +138,29 @@ class DashboardScreen : Screen {
     }
 
     @Composable
-    private fun HeaderSection() {
-        Column {
-            Text(
-                "IoT Ecosystem",
-                color = IoTPrimary,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-            Text(
-                "Live System Overview",
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontSize = 16.sp,
-                modifier = Modifier.padding(bottom = 0.dp)
-            )
+    private fun HeaderSection(navigator: cafe.adriel.voyager.navigator.Navigator?) {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Column {
+                Text(
+                    "IoT Ecosystem",
+                    color = IoTPrimary,
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                Text(
+                    "Live System Overview",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(bottom = 0.dp)
+                )
+            }
+            Button(
+                onClick = { navigator?.push(caonguyen.vu.ui.bluetooth.BluetoothScannerScreen()) },
+                colors = ButtonDefaults.buttonColors(containerColor = IoTPrimary)
+            ) {
+                Text("Scan Bluetooth", color = androidx.compose.ui.graphics.Color.Black, fontWeight = FontWeight.Bold)
+            }
         }
     }
 

@@ -18,7 +18,7 @@ fun App() {
         modules(allModules)
     }) {
         MaterialTheme(colorScheme = IoTDarkColors) {
-            Navigator(LoginScreen()) { navigator ->
+            Navigator(DashboardScreen()) { navigator ->
                 SlideTransition(navigator)
             }
         }

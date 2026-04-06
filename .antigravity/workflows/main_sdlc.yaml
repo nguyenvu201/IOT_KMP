@@ -1,0 +1,14 @@
+name: "Agentic SDLC Workflow"
+on:
+  task_start: 
+    - action: "spawn_agent"
+      rule: "orchestrator.md"
+steps:
+  - name: "Development"
+    agent: "coder.md"
+    commands: ["./gradlew check"]
+  - name: "Dual Review"
+    agents: ["reviewer_logic.md", "reviewer_style.md"]
+    loop_until: "both_approved"
+  - name: "Git Operations"
+    agent: "git_shipper.md"
