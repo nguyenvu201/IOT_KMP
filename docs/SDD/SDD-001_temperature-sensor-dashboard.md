@@ -1,11 +1,11 @@
-# SDD-003: Software Design — Lấy data MQTT từ esp8266 hiển thị lên app Compose thông qua backend Ktor
+# SDD-001: Software Design — Lấy data MQTT từ esp8266 hiển thị lên app Compose thông qua backend Ktor
 
 | Field | Value |
 |-------|-------|
-| **Document ID** | SDD-003 |
+| **Document ID** | SDD-001 |
 | **Version** | 1.0.0 |
 | **Status** | DRAFT |
-| **Feature ID** | `Hiển thị Cảm biến Nhiệt độ` |
+| **Feature ID** | `Temperature Sensor Dashboard` |
 | **Created** | 2026-04-07 |
 | **Parent SDD** | SDD-001 |
 | **Standard** | IEC 62304 §5.4 |
@@ -85,4 +85,4 @@ data class SensorData(
 - Exposed
 
 ---
-*Document: SDD-003 | Standard: IEC 62304 §5.4 | Feature: Hiển thị Cảm biến Nhiệt độ*
+*Document: SDD-001 | Standard: IEC 62304 §5.4 | Feature: Temperature Sensor Dashboard*

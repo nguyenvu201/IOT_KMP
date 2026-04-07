@@ -5,7 +5,7 @@
 | **Document ID** | VVR-001 |
 | **Version** | 1.0.0 |
 | **Status** | APPROVED |
-| **Feature ID** | `Hiển thị Cảm biến Nhiệt độ` |
+| **Feature ID** | `Temperature Sensor Dashboard` |
 | **Executed** | 2026-04-07 |
 | **V&V Plan** | VVP-001 |
 | **Overall Result** | ✅ PASS |
@@ -51,4 +51,4 @@ All verification activities for **Lấy data MQTT từ esp8266 hiển thị lên
 **Recommendation**: Approved for integration and release.
 
 ---
-*Document: VVR-001 | Standard: IEC 62304 §5.7 | Feature: Hiển thị Cảm biến Nhiệt độ*
+*Document: VVR-001 | Standard: IEC 62304 §5.7 | Feature: Temperature Sensor Dashboard*

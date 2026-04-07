@@ -7,7 +7,7 @@
 | **Status** | DRAFT |
 | **Author** | kmp-architect |
 | **Created** | 2026-04-07 |
-| **Feature ID** | `Hiển thị Cảm biến Nhiệt độ` |
+| **Feature ID** | `Temperature Sensor Dashboard` |
 | **Parent SRS** | SRS-001 |
 | **Standard** | IEC 62304 §5.2 |
 
@@ -30,6 +30,22 @@ This feature contributes to the following system-level requirements (SRS-001):
 
 > IDs below are feature-scoped. Format: `REQ-<FEATURE>-<NNN>`
 
+### 4.1 Domain Model Requirements
+
+**REQ-TEMP-001** — The system SHALL provide a `SensorData` domain model with fields: `deviceId: String`, `temperature: Double`, `humidity: Double`, `timestamp: Long`.
+
+### 4.2 API Requirements
+
+**REQ-TEMP-002** — The server SHALL expose `GET /api/sensors/temperature/latest`.
+
+### 4.3 IoT / MQTT Requirements
+
+**REQ-TEMP-003** — The server SHALL subscribe to MQTT topic `sensor/temperature/+/data`.
+
+### 4.4 UI Requirements
+
+**REQ-TEMP-004** — The client SHALL provide a `TemperatureScreen` screen displaying: `currentTemperature`, `isLoading`, `error`.
+
 ## 5. Non-Functional Requirements
 
 | Requirement | Inherited From |
@@ -43,7 +59,7 @@ This feature contributes to the following system-level requirements (SRS-001):
 
 | Requirement | SDD Ref | TST Ref |
 |------------|---------|--------|
-| (see §4 above) | SDD-002_hi-n-th-c-m-bi-n-nhi-t.md | VVR-002_hi-n-th-c-m-bi-n-nhi-t_results.md |
+| (see §4 above) | SDD-002_temperature-sensor-dashboard.md | VVR-002_temperature-sensor-dashboard_results.md |
 
 *Full traceability: [TM-001](../TM/TM-001_traceability.md)*
 

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-07T20:48:06.414285",
+  "timestamp": "2026-04-07T20:52:34.583507",
   "project": ".",
   "modules": [
     "composeApp",
@@ -7,22 +7,22 @@
     "server"
   ],
   "module_file_counts": {
-    "composeApp": 14,
-    "shared": 24,
-    "server": 12
+    "composeApp": 16,
+    "shared": 25,
+    "server": 18
   },
   "circular_dependencies": [],
   "module_coupling": {
     "composeApp": {
-      "file_count": 14,
+      "file_count": 16,
       "import_count": 0
     },
     "shared": {
-      "file_count": 24,
+      "file_count": 25,
       "import_count": 0
     },
     "server": {
-      "file_count": 12,
+      "file_count": 18,
       "import_count": 0
     }
   },

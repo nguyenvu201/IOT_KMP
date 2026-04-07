@@ -1,7 +1,7 @@
 # Lấy data MQTT từ esp8266 hiển thị lên app Compose thông qua backend Ktor
 
-> **Feature ID**: `Hiển thị Cảm biến Nhiệt độ`  
-> **Updated**: 2026-04-07 13:48 UTC  
+> **Feature ID**: `Temperature Sensor Dashboard`  
+> **Updated**: 2026-04-07 13:52 UTC  
 > **Platforms**: All
 
 ## Overview

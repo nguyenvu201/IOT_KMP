@@ -1,6 +1,6 @@
 # KMP IoT — Documentation
 
-> Last updated: 2026-04-07 13:48 UTC
+> Last updated: 2026-04-07 13:52 UTC
 
 ## 📁 Structure
 
@@ -14,7 +14,7 @@
 
 ## 🚀 Features
 
-- [Hiển Thị Cảm Biến Nhiệt Độ](features/Hiển thị Cảm biến Nhiệt độ.md)
+- [Temperature Sensor Dashboard](features/Temperature Sensor Dashboard.md)
 - [Sensor Dashboard](features/sensor-dashboard.md)
 
 ## 🏛️ Architecture

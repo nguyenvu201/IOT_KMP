@@ -163,3 +163,19 @@ Tài liệu này cung cấp **bidirectional traceability** từ User Needs → R
 | `REQ-B006` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `TST-B006` | PASS | VVR-003 |
 | `REQ-B007` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `—` | PENDING | VVR-003 |
 | `REQ-U002` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `—` | PENDING | VVR-003 |
+
+
+### Temperature Sensor Dashboard — Added 2026-04-07
+
+| REQ-ID | Description | SDD Ref | Implementation | TST-ID | Result | VVR Ref |
+|--------|-------------|---------|----------------|--------|--------|--------|
+| `REQ-N002` | | (feature: Temperature Sensor Dashboard) | | `TST-N002` | PASS | VVR-002 |
+| `REQ-B006` | | (feature: Temperature Sensor Dashboard) | | `TST-B006` | PASS | VVR-002 |
+| `REQ-B007` | | (feature: Temperature Sensor Dashboard) | | `—` | PENDING | VVR-002 |
+| `REQ-U002` | | (feature: Temperature Sensor Dashboard) | | `—` | PENDING | VVR-002 |
+| `REQ-U002` | | (feature: Temperature Sensor Dashboard) | | `—` | PENDING | VVR-002 |
+| `REQ-B007` | | (feature: Temperature Sensor Dashboard) | | `—` | PENDING | VVR-002 |
+| `REQ-N002` | | (feature: Temperature Sensor Dashboard) | | `TST-N002` | PASS | VVR-002 |
+| `REQ-B006` | | (feature: Temperature Sensor Dashboard) | | `TST-B006` | PASS | VVR-002 |
+| `REQ-B007` | | (feature: Temperature Sensor Dashboard) | | `—` | PENDING | VVR-002 |
+| `REQ-U002` | | (feature: Temperature Sensor Dashboard) | | `—` | PENDING | VVR-002 |

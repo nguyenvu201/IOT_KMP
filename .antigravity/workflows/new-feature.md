@@ -9,7 +9,7 @@ description: Bắt đầu luồng phát triển chức năng mới theo chuẩn 
 Quy trình này sẽ hướng dẫn agent (đóng vai trò Orchestrator) thực hiện đầu cuối một chức năng mới theo quy trình FDA-compliant.
 
 ## Bước 1: Workflow Init (Phase 0)
-- Hỏi người dùng về tên feature (`<feature_name>`) và mô tả (`<description>`) nếu chưa được cung cấp.
+- **MANDATORY**: Tên feature (`<feature_name>`) và mô tả (`<description>`) **BẮT BUỘC phải viết bằng Tiếng Anh** (để tránh lỗi font khi sinh file markdown). Nếu người dùng dùng tiếng Việt, hãy tự dịch sang tiếng Anh.
 - Mở Terminal và chạy lệnh sau để khởi tạo ngữ cảnh dự án:
 ```bash
 python .claude/skills/kmp-tools/scripts/context_manager.py init <feature_name> "<description>"
@@ -17,19 +17,19 @@ python .claude/skills/kmp-tools/scripts/context_manager.py init <feature_name> "
 
 ## Bước 2: Architecture & Design (Phase 1)
 - Đọc rule `.claude/agents/kmp-architect.md`.
-- Suy nghĩ hệ thống, phân rã yêu cầu thành các `REQ-IDs` và xuất file `01_architect.json` với block `_fda` đầy đủ (`soups_introduced`, `risks`, v.v.).
-- Chạy lệnh sau để tạo Draft Docs (SRS và SDD):
+- Sinh file `01_architect.json` với block `_fda` đầy đủ (`soups_introduced`, `risks`, `module_plan` với đường dẫn file cụ thể).
+- Chạy lệnh sau để tạo Draft Docs:
 ```bash
 python .claude/skills/kmp-tools/scripts/doc_generator.py --srs --sdd
 ```
 
-## Bước 3: Implementation (Phase 2)
-Phân rã task xuống các layer và thực hiện code (áp dụng tuần tự hoặc theo rule tương ứng trong `.claude/agents/`):
-- **kmp-shared**: Code file domain, models, repo interfaces. Output `02_shared.json`.
-- **kmp-iot**: Code MQTT/thiết bị logic. Output `03_iot.json`.
-- **kmp-ktor-backend**: Code server routes, database logic. Output `04_ktor.json`.
-- **kmp-compose**: Code giao diện người dùng. Output `05_compose.json`.
-> **MANDATORY**: Bạn PHẢI điền `_fda.requirements_implemented` vào tất cả các file JSON trên.
+## Bước 3: Implementation (Phase 2 - ACTUAL CODING)
+Bạn PHẢI TRỰC TIẾP VIẾT CODE (.kt files) cho tất cả các layer được định nghĩa trong `01_architect.json`:
+- Viết file Domain models, repo interfaces cho thư mục `shared/`.
+- Viết file MQTT Subscriber cho thư mục `server/`.
+- Viết file Backend Routes và DB cho thư mục `server/`.
+- Viết file Compose UI Screen và ViewModel cho thư mục `composeApp/`.
+- **Sau khi viết code**, Cập nhật lần lượt các file `02_shared.json`, `03_iot.json`, `04_ktor.json`, `05_compose.json` với `_fda.requirements_implemented`.
 
 ## Bước 4: Dual Code Review (Phase 3)
 - Đọc rule `.antigravity/rules/reviewer_logic.md` và `.antigravity/rules/reviewer_style.md`.
