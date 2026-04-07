@@ -30,6 +30,9 @@ class DashboardViewModel : ViewModel() {
     private val _sensorDataMap = MutableStateFlow<Map<String, SensorData>>(emptyMap())
     val sensorDataMap = _sensorDataMap.asStateFlow()
 
+    private val _sensorHistory = MutableStateFlow<List<SensorData>>(emptyList())
+    val sensorHistory = _sensorHistory.asStateFlow()
+
     private val _espPins = MutableStateFlow<List<caonguyen.vu.shared.models.EspPinState>>(emptyList())
     val espPins = _espPins.asStateFlow()
 
@@ -195,14 +198,24 @@ class DashboardViewModel : ViewModel() {
             while (true) {
                 delay(2000)
                 val newTemp = (20..35).random().toDouble() + kotlin.random.Random.nextDouble()
+                val newHumidity = (50..70).random().toDouble() + kotlin.random.Random.nextDouble()
+                val newWaterFlow = (10..22).random().toDouble() + kotlin.random.Random.nextDouble()
+                val newPhLevel = (6..8).random().toDouble() + kotlin.random.Random.nextDouble()
+
                 val currentMap = _sensorDataMap.value.toMutableMap()
                 
-                currentMap["MOCK-RS485-Node-1"] = SensorData(
+                val newData = SensorData(
                     deviceId = "MOCK-RS485-Node-1",
                     temperature = newTemp,
-                    humidity = 60.0,
+                    humidity = newHumidity,
+                    waterFlow = newWaterFlow,
+                    phLevel = newPhLevel,
                     timestamp = 0L // Mocked timestamp to avoid adding kotlinx-datetime
                 )
+                
+                currentMap["MOCK-RS485-Node-1"] = newData
+                
+                _sensorHistory.value = (_sensorHistory.value + newData).takeLast(20)
                 
                 // Randomly fluctuate Analog A0 for visual effect
                 _espPins.value = _espPins.value.map {

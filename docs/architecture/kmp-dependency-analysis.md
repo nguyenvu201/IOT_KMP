@@ -1,10 +1,10 @@
 # KMP Module Dependency Analysis
 
-**Generated**: 2026-04-07T21:10:49.753084
+**Generated**: 2026-04-07T21:21:23.091518
 
 ## Modules Found (3)
 
-- **composeApp**: 16 Kotlin files, 0 cross-module imports
+- **composeApp**: 18 Kotlin files, 0 cross-module imports
 - **shared**: 25 Kotlin files, 0 cross-module imports
 - **server**: 18 Kotlin files, 0 cross-module imports
 

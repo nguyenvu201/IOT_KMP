@@ -2,12 +2,12 @@
   "_schema": "kmp-workflow/v2",
   "_file": "00_workflow.json",
   "_written_by": "kmp-orchestrator",
-  "_timestamp": "2026-04-07T14:09:00.208294Z",
+  "_timestamp": "2026-04-07T14:14:37.242216Z",
   "workflow": {
-    "name": "TemperatureDashBack",
-    "feature": "Thêm nút back và mock data cho Temperature Dashboard",
+    "name": "MonitoringCharts",
+    "feature": "Màn hình giám sát biểu đồ đo nhiệt độ, độ ẩm, lưu lượng nước, nồng độ pH",
     "status": "started",
-    "started_at": "2026-04-07T14:09:00.208427Z",
+    "started_at": "2026-04-07T14:14:37.242361Z",
     "completed_at": null
   },
   "tech_stack": {

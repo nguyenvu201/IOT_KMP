@@ -171,6 +171,15 @@ class DashboardScreen : Screen {
                 ) {
                     Text("View Temperature", color = androidx.compose.ui.graphics.Color.White, fontWeight = FontWeight.Bold)
                 }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(
+                    onClick = { 
+                        navigator?.push(MonitoringScreen()) 
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = IoTSecondary)
+                ) {
+                    Text("Live Charts", color = androidx.compose.ui.graphics.Color.White, fontWeight = FontWeight.Bold)
+                }
             }
         }
     }

@@ -7,6 +7,11 @@ import caonguyen.vu.shared.models.SensorData
 class TemperatureViewModel {
     fun loadLatestTemperature(): SensorData {
         // Logic to fetch from repository
-        return SensorData("esp8266_01", 26.5, 45.0, 16100000)
+        return SensorData(
+            deviceId = "esp8266_01", 
+            temperature = 26.5, 
+            humidity = 45.0, 
+            timestamp = 16100000L
+        )
     }
 }

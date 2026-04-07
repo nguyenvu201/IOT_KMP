@@ -1,29 +1,13 @@
 {
-  "_schema": "kmp-workflow/v2",
-  "_file": "02_shared.json",
-  "_written_by": "kmp-shared",
-  "_timestamp": "2026-04-07T13:46:00Z",
-  "_status": "success",
-  "_reads": ["01_architect.json"],
-  "summary": "Implemented Domain models and APIs for Sensor",
-  "outputs": {
-    "domain_models": [
-      {
-        "name": "SensorData",
-        "file": "shared/src/commonMain/kotlin/caonguyen/vu/shared/models/SensorData.kt",
-        "fields": ["deviceId: String", "temperature: Double", "humidity: Double", "timestamp: Long"]
-      }
-    ],
-    "repositories": [
-      {
-        "interface": "SensorApi",
-        "file": "shared/src/commonMain/kotlin/caonguyen/vu/shared/network/SensorApi.kt"
-      }
-    ]
-  },
+  "module": "shared",
+  "files_changed": [
+    "shared/src/commonMain/kotlin/caonguyen/vu/shared/models/SensorData.kt"
+  ],
   "_fda": {
-    "doc_ref": "SDD-002",
-    "requirements_implemented": ["REQ-U002", "REQ-B007"],
-    "soups_used": ["kotlinx.serialization"]
+    "requirements_implemented": [
+      "REQ-SYS-CHART-01"
+    ],
+    "soups_introduced": [],
+    "risks": []
   }
 }
