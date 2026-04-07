@@ -1,6 +1,6 @@
 # API Reference
 
-> **Updated**: 2026-04-07 14:10 UTC
+> **Updated**: 2026-04-07 14:28 UTC
 
 **Base URL**: `http://localhost:8085`  
 **Health**: `GET /health`

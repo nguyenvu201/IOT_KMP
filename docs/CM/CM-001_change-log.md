@@ -170,6 +170,41 @@ API endpoints: `GET /api/sensors/temperature/latest`.
 - [x] Security review passed
 
 ---
+
+### CM-005: [2026-04-07] Chart is jittery and missing numeric annotations for readability
+
+| Field | Value |
+|-------|-------|
+| **Change ID** | CM-005 |
+| **Date** | 2026-04-07 |
+| **Type** | Feature |
+| **Feature ID** | `Chart UI Issues` |
+| **Author** | kmp-orchestrator |
+| **REQ Impacted** | `REQ-B006`, `REQ-B007`, `REQ-SYS-CHART-01` |
+| **RISK Impacted** | `RISK-009` |
+| **SDD Ref** | SDD-005_chart ui issues.md |
+| **VVR Ref** | VVR-005_chart ui issues_results.md |
+
+#### Description
+
+Implemented: **Chart is jittery and missing numeric annotations for readability**.
+
+API endpoints: `GET /api/sensors/temperature/latest`.
+
+#### Impact Assessment
+
+- **Tests**: ✅ All tests pass
+- **Security**: ✅ No critical issues
+- **SOUP changes**: None new lib(s)
+
+#### Approval Checklist
+
+- [ ] Code review passed
+- [x] All tests pass (`./gradlew allTests`)
+- [ ] Documentation updated and committed
+- [x] Security review passed
+
+---
 ### CM-001: [2026-04-07] Initial System Setup
 
 | Field | Value |

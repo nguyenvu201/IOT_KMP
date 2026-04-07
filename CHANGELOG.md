@@ -9,6 +9,18 @@ Format: `[YYYY-MM-DD] Feature description`
 
 
 
+
+## [2026-04-07] Chart is jittery and missing numeric annotations for readability
+
+> Feature ID: `Chart UI Issues`
+
+### 🖥️ API Endpoints
+- `GET /api/sensors/temperature/latest`
+
+### ✅ Testing
+- All tests pass
+
+---
 ## [2026-04-07] Thêm nút back và mock data cho Temperature Dashboard
 
 > Feature ID: `TemperatureDashBack`

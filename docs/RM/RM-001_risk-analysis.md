@@ -294,6 +294,21 @@ Tài liệu này là **master risk register** cho hệ thống KMP IoT. Mỗi ha
 
 ---
 
+
+### RISK-NEW — (Feature: Chart UI Issues)
+
+| Field | Value |
+|-------|-------|
+| **Risk ID** | RISK-NEW |
+| **Hazard** |  |
+| **Severity** | Medium |
+| **Likelihood** | Possible |
+| **Control** |  |
+| **REQ Ref** |  |
+| **Status** | Open |
+
+---
+
 ## 5. Risk Update Log
 
 | Date | Risk ID | Change | Changed By |
@@ -306,3 +321,4 @@ Tài liệu này là **master risk register** cho hệ thống KMP IoT. Mỗi ha
 | 2026-04-07 | New risks from `Hiển thị Cảm biến Nhiệt độ` | kmp-architect |
 | 2026-04-07 | New risks from `Temperature Sensor Dashboard` | kmp-architect |
 | 2026-04-07 | New risks from `TemperatureDashBack` | kmp-architect |
+| 2026-04-07 | New risks from `Chart UI Issues` | kmp-architect |

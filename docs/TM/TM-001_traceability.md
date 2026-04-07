@@ -196,3 +196,17 @@ Tài liệu này cung cấp **bidirectional traceability** từ User Needs → R
 | `REQ-B007` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
 | `REQ-UI-TEMP-002` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
 | `REQ-UI-NAV-001` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
+
+
+### Chart UI Issues — Added 2026-04-07
+
+| REQ-ID | Description | SDD Ref | Implementation | TST-ID | Result | VVR Ref |
+|--------|-------------|---------|----------------|--------|--------|--------|
+| `REQ-SYS-CHART-01` | | (feature: Chart UI Issues) | | `—` | PENDING | VVR-006 |
+| `REQ-N002` | | (feature: Chart UI Issues) | | `TST-N002` | PASS | VVR-006 |
+| `REQ-B006` | | (feature: Chart UI Issues) | | `TST-B006` | PASS | VVR-006 |
+| `REQ-B007` | | (feature: Chart UI Issues) | | `—` | PENDING | VVR-006 |
+| `REQ-SYS-CHART-01` | | (feature: Chart UI Issues) | | `—` | PENDING | VVR-006 |
+| `REQ-SYS-CHART-02` | | (feature: Chart UI Issues) | | `—` | PENDING | VVR-006 |
+| `REQ-SYS-CHART-03` | | (feature: Chart UI Issues) | | `—` | PENDING | VVR-006 |
+| `REQ-SYS-CHART-04` | | (feature: Chart UI Issues) | | `—` | PENDING | VVR-006 |

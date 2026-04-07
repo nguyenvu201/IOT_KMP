@@ -2,12 +2,12 @@
   "_schema": "kmp-workflow/v2",
   "_file": "00_workflow.json",
   "_written_by": "kmp-orchestrator",
-  "_timestamp": "2026-04-07T14:14:37.242216Z",
+  "_timestamp": "2026-04-07T14:26:25.136967Z",
   "workflow": {
-    "name": "MonitoringCharts",
-    "feature": "Màn hình giám sát biểu đồ đo nhiệt độ, độ ẩm, lưu lượng nước, nồng độ pH",
+    "name": "Chart UI Issues",
+    "feature": "Chart is jittery and missing numeric annotations for readability",
     "status": "started",
-    "started_at": "2026-04-07T14:14:37.242361Z",
+    "started_at": "2026-04-07T14:26:25.137100Z",
     "completed_at": null
   },
   "tech_stack": {
