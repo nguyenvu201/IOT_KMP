@@ -1,0 +1,65 @@
+Reusing configuration cache.
+> Task :composeApp:prepareAppResources NO-SOURCE
+> Task :composeApp:kmpPartiallyResolvedDependenciesChecker
+> Task :composeApp:convertXmlValueResourcesForJvmMain NO-SOURCE
+> Task :shared:jvmProcessResources NO-SOURCE
+> Task :composeApp:generateComposeResClass UP-TO-DATE
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :composeApp:generateExpectResourceCollectorsForCommonMain UP-TO-DATE
+> Task :shared:generateBuildKonfig UP-TO-DATE
+> Task :composeApp:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForJvmMain NO-SOURCE
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:processJvmMainResources SKIPPED
+> Task :composeApp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :composeApp:copyNonXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :composeApp:prepareComposeResourcesTaskForJvmMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonMain UP-TO-DATE
+> Task :composeApp:generateResourceAccessorsForJvmMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForCommonMain UP-TO-DATE
+> Task :composeApp:generateActualResourceCollectorsForJvmMain UP-TO-DATE
+> Task :composeApp:assembleJvmMainResources UP-TO-DATE
+> Task :shared:compileKotlinJvm UP-TO-DATE
+> Task :composeApp:jvmProcessResources UP-TO-DATE
+> Task :shared:compileJvmMainJava NO-SOURCE
+> Task :composeApp:processJvmMainResources SKIPPED
+> Task :shared:jvmMainClasses UP-TO-DATE
+> Task :shared:jvmJar UP-TO-DATE
+
+> Task :composeApp:compileKotlinJvm FAILED
+e: file:///Volumes/SSD_MAC_EXTEND/Learn/Antigravity/KMP/KMPRoadMap/composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/DashboardScreen.kt:296:40 None of the following candidates is applicable:
+
+val ColorSchemeKeyTokens.value: Color:
+  Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+val ColorSchemeKeyTokens.value: Color
+
+val ShapeKeyTokens.value: Shape:
+  Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+val ShapeKeyTokens.value: Shape
+
+val TypographyKeyTokens.value: TextStyle:
+  Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+val TypographyKeyTokens.value: TextStyle
+e: file:///Volumes/SSD_MAC_EXTEND/Learn/Antigravity/KMP/KMPRoadMap/composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/DashboardScreen.kt:296:73 Unresolved reference 'unit'.
+e: file:///Volumes/SSD_MAC_EXTEND/Learn/Antigravity/KMP/KMPRoadMap/composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/DashboardScreen.kt:312:1 Syntax error: Expecting a top level declaration.
+e: file:///Volumes/SSD_MAC_EXTEND/Learn/Antigravity/KMP/KMPRoadMap/composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/DashboardViewModel.kt:203:21 No parameter with name 'value' found.
+e: file:///Volumes/SSD_MAC_EXTEND/Learn/Antigravity/KMP/KMPRoadMap/composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/DashboardViewModel.kt:204:21 No parameter with name 'unit' found.
+e: file:///Volumes/SSD_MAC_EXTEND/Learn/Antigravity/KMP/KMPRoadMap/composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/DashboardViewModel.kt:205:21 No parameter with name 'sensorType' found.
+e: file:///Volumes/SSD_MAC_EXTEND/Learn/Antigravity/KMP/KMPRoadMap/composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/DashboardViewModel.kt:205:21 No value passed for parameter 'temperature'.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':composeApp:compileKotlinJvm'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 892ms
+14 actionable tasks: 3 executed, 11 up-to-date
+Configuration cache entry reused.

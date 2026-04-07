@@ -155,6 +155,7 @@ class DashboardScreen : Screen {
                     modifier = Modifier.padding(bottom = 0.dp)
                 )
             }
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
                 Button(
                     onClick = { navigator?.push(caonguyen.vu.ui.bluetooth.BluetoothScannerScreen()) },
                     colors = ButtonDefaults.buttonColors(containerColor = IoTPrimary)
@@ -164,7 +165,7 @@ class DashboardScreen : Screen {
                 Spacer(modifier = Modifier.width(8.dp))
                 Button(
                     onClick = { 
-                        // navigator?.push(caonguyen.vu.ui.dashboard.TemperatureScreen(null)) 
+                        navigator?.push(TemperatureScreen(null)) 
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = IoTSecondary)
                 ) {
@@ -293,7 +294,7 @@ class DashboardScreen : Screen {
                 
                 if (data != null) {
                     Text(
-                        text = "${data.value.toString().take(5)} ${data.unit}",
+                        text = "${data.temperature.toString().take(5)} °C",
                         color = IoTPrimary,
                         fontSize = 36.sp,
                         fontWeight = FontWeight.Light

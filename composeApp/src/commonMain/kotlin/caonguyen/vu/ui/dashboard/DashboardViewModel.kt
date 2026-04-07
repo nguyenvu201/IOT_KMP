@@ -199,10 +199,9 @@ class DashboardViewModel : ViewModel() {
                 
                 currentMap["MOCK-RS485-Node-1"] = SensorData(
                     deviceId = "MOCK-RS485-Node-1",
-                    timestamp = 0L, // Mocked timestamp to avoid adding kotlinx-datetime
-                    value = newTemp,
-                    unit = "°C",
-                    sensorType = "Temperature"
+                    temperature = newTemp,
+                    humidity = 60.0,
+                    timestamp = 0L // Mocked timestamp to avoid adding kotlinx-datetime
                 )
                 
                 // Randomly fluctuate Analog A0 for visual effect

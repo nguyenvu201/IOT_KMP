@@ -1,0 +1,262 @@
+Calculating task graph as no cached configuration is available for tasks: :server:run
+Type-safe project accessors is an incubating feature.
+
+> Configure project :composeApp
+w: [33m[1m⚠️ The 'org.jetbrains.kotlin.multiplatform' plugin deprecated compatibility with Android Gradle plugin: 'com.android.application'[0m[0m
+The 'org.jetbrains.kotlin.multiplatform' plugin will not be compatible with 'com.android.application' starting with Android Gradle Plugin 9.0.0.
+
+Please change the structure of the your project and move the usage of 'com.android.application' into a separate subproject. The new subproject should add a dependency on this KMP subproject.
+
+Read more: https://kotl.in/kmp-project-structure-migration
+[32m[1mSolution:[0m[0m
+[32m[3mPlease change the structure of your project and move the usage of 'com.android.application' into a separate subproject.[0m[0m
+[36mSee [0m[34mhttps://kotl.in/gradle/agp-new-kmp[0m[36m for more details.[0m
+
+
+> Configure project :shared
+w: [33m[1m⚠️ The 'org.jetbrains.kotlin.multiplatform' plugin deprecated compatibility with Android Gradle plugin: 'com.android.library'[0m[0m
+The 'org.jetbrains.kotlin.multiplatform' plugin will not be compatible with 'com.android.library' starting with Android Gradle Plugin 9.0.0.
+[32m[1mSolution:[0m[0m
+[32m[3mPlease use the 'com.android.kotlin.multiplatform.library' plugin instead of 'com.android.library'.[0m[0m
+[36mSee [0m[34mhttps://kotl.in/gradle/agp-new-kmp[0m[36m for more details.[0m
+
+
+> Task :server:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:jvmProcessResources NO-SOURCE
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :shared:processJvmMainResources SKIPPED
+> Task :shared:generateBuildKonfig UP-TO-DATE
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :server:processResources UP-TO-DATE
+> Task :shared:compileKotlinJvm UP-TO-DATE
+> Task :shared:compileJvmMainJava NO-SOURCE
+> Task :shared:jvmMainClasses UP-TO-DATE
+> Task :shared:jvmJar UP-TO-DATE
+> Task :server:compileKotlin UP-TO-DATE
+> Task :server:compileJava NO-SOURCE
+> Task :server:classes UP-TO-DATE
+
+> Task :server:run FAILED
+2026-04-07 21:00:04.130 [main] INFO  io.ktor.server.Application - Autoreload is disabled because the development mode is off.
+2026-04-07 21:00:04.154 [main] DEBUG com.zaxxer.hikari.HikariConfig - Driver class org.postgresql.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@694355ec
+2026-04-07 21:00:04.157 [main] DEBUG com.zaxxer.hikari.HikariConfig - HikariPool-1 - configuration:
+2026-04-07 21:00:04.160 [main] DEBUG com.zaxxer.hikari.HikariConfig - allowPoolSuspension.............false
+2026-04-07 21:00:04.160 [main] DEBUG com.zaxxer.hikari.HikariConfig - autoCommit......................false
+2026-04-07 21:00:04.160 [main] DEBUG com.zaxxer.hikari.HikariConfig - catalog.........................none
+2026-04-07 21:00:04.161 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionInitSql...............none
+2026-04-07 21:00:04.161 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionTestQuery.............none
+2026-04-07 21:00:04.161 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionTimeout...............30000
+2026-04-07 21:00:04.161 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSource......................none
+2026-04-07 21:00:04.161 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceClassName.............none
+2026-04-07 21:00:04.161 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceJNDI..................none
+2026-04-07 21:00:04.161 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceProperties............{password=<masked>}
+2026-04-07 21:00:04.161 [main] DEBUG com.zaxxer.hikari.HikariConfig - driverClassName................."org.postgresql.Driver"
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName......none
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckProperties...........{}
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckRegistry.............none
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - idleTimeout.....................600000
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - initializationFailTimeout.......1
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - isolateInternalQueries..........false
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - jdbcUrl.........................jdbc:postgresql://127.0.0.1:5432/kmp_iot_db
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - keepaliveTime...................0
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - leakDetectionThreshold..........0
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - maxLifetime.....................1800000
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - maximumPoolSize.................10
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - metricRegistry..................none
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - metricsTrackerFactory...........none
+2026-04-07 21:00:04.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - minimumIdle.....................10
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - password........................<masked>
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - poolName........................"HikariPool-1"
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - readOnly........................false
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - registerMbeans..................false
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - scheduledExecutor...............none
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - schema..........................none
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - threadFactory...................internal
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - transactionIsolation............"TRANSACTION_REPEATABLE_READ"
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - username........................"kmp_iot_user"
+2026-04-07 21:00:04.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - validationTimeout...............5000
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - HikariPool-1 - configuration:
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - allowPoolSuspension.............false
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - autoCommit......................false
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - catalog.........................none
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionInitSql...............none
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionTestQuery.............none
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionTimeout...............30000
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSource......................none
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceClassName.............none
+2026-04-07 21:00:04.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceJNDI..................none
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceProperties............{password=<masked>}
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - driverClassName................."org.postgresql.Driver"
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName......none
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckProperties...........{}
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckRegistry.............none
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - idleTimeout.....................600000
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - initializationFailTimeout.......1
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - isolateInternalQueries..........false
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - jdbcUrl.........................jdbc:postgresql://127.0.0.1:5432/kmp_iot_db
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - keepaliveTime...................0
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - leakDetectionThreshold..........0
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - maxLifetime.....................1800000
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - maximumPoolSize.................10
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - metricRegistry..................none
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - metricsTrackerFactory...........none
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - minimumIdle.....................10
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - password........................<masked>
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - poolName........................"HikariPool-1"
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - readOnly........................false
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - registerMbeans..................false
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - scheduledExecutor...............none
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - schema..........................none
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - threadFactory...................internal
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - transactionIsolation............"TRANSACTION_REPEATABLE_READ"
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - username........................"kmp_iot_user"
+2026-04-07 21:00:04.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - validationTimeout...............5000
+2026-04-07 21:00:04.169 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-07 21:00:04.187 [main] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to create/setup connection: Connection to 127.0.0.1:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-04-07 21:00:04.187 [main] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Cannot acquire connection from data source
+org.postgresql.util.PSQLException: Connection to 127.0.0.1:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:346)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
+	at org.postgresql.Driver.makeConnection(Driver.java:446)
+	at org.postgresql.Driver.connect(Driver.java:298)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:80)
+	at caonguyen.vu.server.database.DatabaseFactory.hikari(DatabaseFactory.kt:38)
+	at caonguyen.vu.server.database.DatabaseFactory.init(DatabaseFactory.kt:16)
+	at caonguyen.vu.ApplicationKt.module(Application.kt:35)
+	at caonguyen.vu.ApplicationKt.main$module(Application.kt:28)
+	at caonguyen.vu.ApplicationKt.access$main$module(Application.kt:1)
+	at caonguyen.vu.ApplicationKt$main$1.invoke(Application.kt:28)
+	at caonguyen.vu.ApplicationKt$main$1.invoke(Application.kt:28)
+	at io.ktor.server.engine.EmbeddedServer$wrapWithDynamicModule$1.invokeSuspend(EmbeddedServerJvm.kt:443)
+	at io.ktor.server.engine.EmbeddedServer$wrapWithDynamicModule$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.engine.EmbeddedServer$wrapWithDynamicModule$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.application.ApplicationModules_jvmKt$LoadSequentially$1.loadModules(ApplicationModules.jvm.kt:75)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1$1.invokeSuspend(EmbeddedServerJvm.kt:384)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1$1.invoke(EmbeddedServerJvm.kt)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndspatched(Undispatched.kt:66)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturnIgnoreTimeout(Undispatched.kt:50)
+	at kotlinx.coroutines.TimeoutKt.setupTimeout(Timeout.kt:149)
+	at kotlinx.coroutines.TimeoutKt.withTimeout(Timeout.kt:44)
+	at kotlinx.coroutines.TimeoutKt.withTimeout-KLykuaI(Timeout.kt:72)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1.invokeSuspend(EmbeddedServerJvm.kt:383)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.engine.EmbeddedServer$avoidingDoubleStartup$1.invokeSuspend(EmbeddedServerJvm.kt:455)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:263)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:94)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:70)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:48)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at io.ktor.server.engine.EmbeddedServer.avoidingDoubleStartup(EmbeddedServerJvm.kt:454)
+	at io.ktor.server.engine.EmbeddedServer.instantiateAndConfigureApplication(EmbeddedServerJvm.kt:382)
+	at io.ktor.server.engine.EmbeddedServer.createApplication(EmbeddedServerJvm.kt:168)
+	at io.ktor.server.engine.EmbeddedServer.start(EmbeddedServerJvm.kt:313)
+	at caonguyen.vu.ApplicationKt.main(Application.kt:29)
+	at caonguyen.vu.ApplicationKt.main(Application.kt)
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:694)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:243)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:136)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:262)
+	... 48 common frames omitted
+Exception in thread "main" com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: Connection to 127.0.0.1:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:584)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:571)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:80)
+	at caonguyen.vu.server.database.DatabaseFactory.hikari(DatabaseFactory.kt:38)
+	at caonguyen.vu.server.database.DatabaseFactory.init(DatabaseFactory.kt:16)
+	at caonguyen.vu.ApplicationKt.module(Application.kt:35)
+	at caonguyen.vu.ApplicationKt.main$module(Application.kt:28)
+	at caonguyen.vu.ApplicationKt.access$main$module(Application.kt:1)
+	at caonguyen.vu.ApplicationKt$main$1.invoke(Application.kt:28)
+	at caonguyen.vu.ApplicationKt$main$1.invoke(Application.kt:28)
+	at io.ktor.server.engine.EmbeddedServer$wrapWithDynamicModule$1.invokeSuspend(EmbeddedServerJvm.kt:443)
+	at io.ktor.server.engine.EmbeddedServer$wrapWithDynamicModule$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.engine.EmbeddedServer$wrapWithDynamicModule$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.application.ApplicationModules_jvmKt$LoadSequentially$1.loadModules(ApplicationModules.jvm.kt:75)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1$1.invokeSuspend(EmbeddedServerJvm.kt:384)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1$1.invoke(EmbeddedServerJvm.kt)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndspatched(Undispatched.kt:66)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturnIgnoreTimeout(Undispatched.kt:50)
+	at kotlinx.coroutines.TimeoutKt.setupTimeout(Timeout.kt:149)
+	at kotlinx.coroutines.TimeoutKt.withTimeout(Timeout.kt:44)
+	at kotlinx.coroutines.TimeoutKt.withTimeout-KLykuaI(Timeout.kt:72)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1.invokeSuspend(EmbeddedServerJvm.kt:383)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.engine.EmbeddedServer$instantiateAndConfigureApplication$1.invoke(EmbeddedServerJvm.kt)
+	at io.ktor.server.engine.EmbeddedServer$avoidingDoubleStartup$1.invokeSuspend(EmbeddedServerJvm.kt:455)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:263)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:94)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:70)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:48)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at io.ktor.server.engine.EmbeddedServer.avoidingDoubleStartup(EmbeddedServerJvm.kt:454)
+	at io.ktor.server.engine.EmbeddedServer.instantiateAndConfigureApplication(EmbeddedServerJvm.kt:382)
+	at io.ktor.server.engine.EmbeddedServer.createApplication(EmbeddedServerJvm.kt:168)
+	at io.ktor.server.engine.EmbeddedServer.start(EmbeddedServerJvm.kt:313)
+	at caonguyen.vu.ApplicationKt.main(Application.kt:29)
+	at caonguyen.vu.ApplicationKt.main(Application.kt)
+Caused by: org.postgresql.util.PSQLException: Connection to 127.0.0.1:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:346)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
+	at org.postgresql.Driver.makeConnection(Driver.java:446)
+	at org.postgresql.Driver.connect(Driver.java:298)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550)
+	... 39 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:694)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:751)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:243)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:136)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:262)
+	... 48 more
+
+[Incubating] Problems report is available at: file:///Volumes/SSD_MAC_EXTEND/Learn/Antigravity/KMP/KMPRoadMap/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':server:run'.
+> Process 'command '/Users/vunguyen/.gradle/jdks/jetbrains_s_r_o_-21-aarch64-os_x.2/jbrsdk_jcef-21.0.10-osx-aarch64-b1163.110/Contents/Home/bin/java'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1s
+7 actionable tasks: 2 executed, 5 up-to-date
+Configuration cache entry stored.
