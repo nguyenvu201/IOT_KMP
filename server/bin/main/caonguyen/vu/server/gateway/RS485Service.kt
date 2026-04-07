@@ -41,10 +41,9 @@ class RS485Service {
                     // Simulating parsed Modbus data into Domain Model
                     val data = SensorData(
                         deviceId = "RS485-Node-1",
-                        timestamp = System.currentTimeMillis(),
-                        value = (20..35).random().toDouble() + Math.random(),
-                        unit = "°C",
-                        sensorType = "Temperature"
+                        temperature = (20..35).random().toDouble() + Math.random(),
+                        humidity = 60.0,
+                        timestamp = System.currentTimeMillis()
                     )
                     
                     _sensorDataFlow.tryEmit(data)

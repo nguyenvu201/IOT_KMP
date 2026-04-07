@@ -59,10 +59,9 @@ fun Application.module() {
                 delay(5000)
                 val mockData = caonguyen.vu.shared.models.SensorData(
                     deviceId = "MOCK-RS485-Node-1",
-                    timestamp = System.currentTimeMillis(),
-                    value = (20..35).random().toDouble() + Math.random(),
-                    unit = "°C",
-                    sensorType = "Temperature"
+                    temperature = (20..35).random().toDouble() + Math.random(),
+                    humidity = 60.0,
+                    timestamp = System.currentTimeMillis()
                 )
                 mqttGateway.publishSensorData(mockData)
             }

@@ -155,11 +155,21 @@ class DashboardScreen : Screen {
                     modifier = Modifier.padding(bottom = 0.dp)
                 )
             }
-            Button(
-                onClick = { navigator?.push(caonguyen.vu.ui.bluetooth.BluetoothScannerScreen()) },
-                colors = ButtonDefaults.buttonColors(containerColor = IoTPrimary)
-            ) {
-                Text("Scan Bluetooth", color = androidx.compose.ui.graphics.Color.Black, fontWeight = FontWeight.Bold)
+                Button(
+                    onClick = { navigator?.push(caonguyen.vu.ui.bluetooth.BluetoothScannerScreen()) },
+                    colors = ButtonDefaults.buttonColors(containerColor = IoTPrimary)
+                ) {
+                    Text("Scan Bluetooth", color = androidx.compose.ui.graphics.Color.Black, fontWeight = FontWeight.Bold)
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(
+                    onClick = { 
+                        // navigator?.push(caonguyen.vu.ui.dashboard.TemperatureScreen(null)) 
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = IoTSecondary)
+                ) {
+                    Text("View Temperature", color = androidx.compose.ui.graphics.Color.White, fontWeight = FontWeight.Bold)
+                }
             }
         }
     }
