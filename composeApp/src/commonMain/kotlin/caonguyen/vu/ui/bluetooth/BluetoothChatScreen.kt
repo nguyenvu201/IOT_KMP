@@ -116,7 +116,7 @@ class BluetoothChatScreen(private val macAddress: String, private val deviceName
                         ),
                         enabled = connectionState == ConnectionState.CONNECTED
                     )
-                    IconButton(
+                    TextButton(
                         onClick = {
                             if (inputText.isNotBlank() && connectionState == ConnectionState.CONNECTED) {
                                 controller.sendMessage(inputText)
@@ -125,7 +125,7 @@ class BluetoothChatScreen(private val macAddress: String, private val deviceName
                         },
                         enabled = connectionState == ConnectionState.CONNECTED
                     ) {
-                        Text("Send", color = Color(0xFF00E676), fontWeight = FontWeight.Bold)
+                        Text("Send", color = if (connectionState == ConnectionState.CONNECTED) Color(0xFF00E676) else Color.Gray, fontWeight = FontWeight.Bold)
                     }
                 }
             }

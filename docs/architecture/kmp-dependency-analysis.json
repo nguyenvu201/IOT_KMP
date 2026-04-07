@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-07T20:31:44.216232",
+  "project": ".",
+  "modules": [
+    "composeApp",
+    "shared",
+    "server"
+  ],
+  "module_file_counts": {
+    "composeApp": 14,
+    "shared": 24,
+    "server": 12
+  },
+  "circular_dependencies": [],
+  "module_coupling": {
+    "composeApp": {
+      "file_count": 14,
+      "import_count": 0
+    },
+    "shared": {
+      "file_count": 24,
+      "import_count": 0
+    },
+    "server": {
+      "file_count": 12,
+      "import_count": 0
+    }
+  },
+  "mermaid_diagram": "```mermaid\ngraph TD\n    composeApp[\"\ud83d\udcf1 composeApp<br/>Compose Multiplatform UI\"]\n    shared[\"\ud83d\udd37 shared<br/>KMP Shared Logic\"]\n    server[\"\ud83d\udda5\ufe0f server<br/>Ktor Backend\"]\n    composeApp --> shared\n    server --> shared\n```"
+}
