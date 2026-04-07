@@ -133,6 +133,43 @@ UI screens: `TemperatureScreen`.
 - [x] Security review passed
 
 ---
+
+### CM-004: [2026-04-07] Thêm nút back và mock data cho Temperature Dashboard
+
+| Field | Value |
+|-------|-------|
+| **Change ID** | CM-004 |
+| **Date** | 2026-04-07 |
+| **Type** | Feature |
+| **Feature ID** | `TemperatureDashBack` |
+| **Author** | kmp-orchestrator |
+| **REQ Impacted** | `REQ-B006`, `REQ-B007`, `REQ-N002`, `REQ-U002` |
+| **RISK Impacted** | `RISK-009`, `RISK-010` |
+| **SDD Ref** | SDD-004_temperaturedashback.md |
+| **VVR Ref** | VVR-004_temperaturedashback_results.md |
+
+#### Description
+
+Implemented: **Thêm nút back và mock data cho Temperature Dashboard**.
+
+Domain models added: `SensorData`.
+
+API endpoints: `GET /api/sensors/temperature/latest`.
+
+#### Impact Assessment
+
+- **Tests**: ✅ All tests pass
+- **Security**: ✅ No critical issues
+- **SOUP changes**: None new lib(s)
+
+#### Approval Checklist
+
+- [ ] Code review passed
+- [x] All tests pass (`./gradlew allTests`)
+- [ ] Documentation updated and committed
+- [x] Security review passed
+
+---
 ### CM-001: [2026-04-07] Initial System Setup
 
 | Field | Value |

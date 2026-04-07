@@ -1,6 +1,6 @@
 # KMP Module Dependency Analysis
 
-**Generated**: 2026-04-07T20:52:34.583507
+**Generated**: 2026-04-07T21:10:49.753084
 
 ## Modules Found (3)
 

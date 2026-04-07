@@ -179,3 +179,20 @@ Tài liệu này cung cấp **bidirectional traceability** từ User Needs → R
 | `REQ-B006` | | (feature: Temperature Sensor Dashboard) | | `TST-B006` | PASS | VVR-002 |
 | `REQ-B007` | | (feature: Temperature Sensor Dashboard) | | `—` | PENDING | VVR-002 |
 | `REQ-U002` | | (feature: Temperature Sensor Dashboard) | | `—` | PENDING | VVR-002 |
+
+
+### TemperatureDashBack — Added 2026-04-07
+
+| REQ-ID | Description | SDD Ref | Implementation | TST-ID | Result | VVR Ref |
+|--------|-------------|---------|----------------|--------|--------|--------|
+| `REQ-N002` | | (feature: TemperatureDashBack) | | `TST-N002` | PASS | VVR-004 |
+| `REQ-B006` | | (feature: TemperatureDashBack) | | `TST-B006` | PASS | VVR-004 |
+| `REQ-B007` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
+| `REQ-U002` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
+| `REQ-U002` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
+| `REQ-B007` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
+| `REQ-N002` | | (feature: TemperatureDashBack) | | `TST-N002` | PASS | VVR-004 |
+| `REQ-B006` | | (feature: TemperatureDashBack) | | `TST-B006` | PASS | VVR-004 |
+| `REQ-B007` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
+| `REQ-UI-TEMP-002` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
+| `REQ-UI-NAV-001` | | (feature: TemperatureDashBack) | | `—` | PENDING | VVR-004 |
