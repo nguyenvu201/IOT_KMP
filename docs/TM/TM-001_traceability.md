@@ -147,3 +147,19 @@ Tài liệu này cung cấp **bidirectional traceability** từ User Needs → R
 
 ---
 *Document: TM-001 | Auto-updated by `doc_generator.py --tm` | Standard: IEC 62304 §5.7*
+
+
+### Hiển thị Cảm biến Nhiệt độ — Added 2026-04-07
+
+| REQ-ID | Description | SDD Ref | Implementation | TST-ID | Result | VVR Ref |
+|--------|-------------|---------|----------------|--------|--------|--------|
+| `REQ-N002` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `TST-N002` | PASS | VVR-003 |
+| `REQ-B006` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `TST-B006` | PASS | VVR-003 |
+| `REQ-B007` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `—` | PENDING | VVR-003 |
+| `REQ-U002` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `—` | PENDING | VVR-003 |
+| `REQ-U002` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `—` | PENDING | VVR-003 |
+| `REQ-B007` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `—` | PENDING | VVR-003 |
+| `REQ-N002` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `TST-N002` | PASS | VVR-003 |
+| `REQ-B006` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `TST-B006` | PASS | VVR-003 |
+| `REQ-B007` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `—` | PENDING | VVR-003 |
+| `REQ-U002` | | (feature: Hiển thị Cảm biến Nhiệt độ) | | `—` | PENDING | VVR-003 |

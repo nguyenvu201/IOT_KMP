@@ -55,6 +55,45 @@ What was changed and why.
 
 ## 3. Change Log
 
+
+### CM-002: [2026-04-07] Lấy data MQTT từ esp8266 hiển thị lên app Compose thông qua backend Ktor
+
+| Field | Value |
+|-------|-------|
+| **Change ID** | CM-002 |
+| **Date** | 2026-04-07 |
+| **Type** | Feature |
+| **Feature ID** | `Hiển thị Cảm biến Nhiệt độ` |
+| **Author** | kmp-orchestrator |
+| **REQ Impacted** | `REQ-B006`, `REQ-B007`, `REQ-N002`, `REQ-U002` |
+| **RISK Impacted** | `RISK-009`, `RISK-010` |
+| **SDD Ref** | SDD-002_hiển thị cảm biến nhiệt độ.md |
+| **VVR Ref** | VVR-002_hiển thị cảm biến nhiệt độ_results.md |
+
+#### Description
+
+Implemented: **Lấy data MQTT từ esp8266 hiển thị lên app Compose thông qua backend Ktor**.
+
+Domain models added: `SensorData`.
+
+API endpoints: `GET /api/sensors/temperature/latest`.
+
+UI screens: `TemperatureScreen`.
+
+#### Impact Assessment
+
+- **Tests**: ✅ All tests pass
+- **Security**: ✅ No critical issues
+- **SOUP changes**: None new lib(s)
+
+#### Approval Checklist
+
+- [ ] Code review passed
+- [x] All tests pass (`./gradlew allTests`)
+- [ ] Documentation updated and committed
+- [x] Security review passed
+
+---
 ### CM-001: [2026-04-07] Initial System Setup
 
 | Field | Value |

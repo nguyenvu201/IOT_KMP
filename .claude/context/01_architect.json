@@ -1,0 +1,80 @@
+{
+  "_schema": "kmp-workflow/v2",
+  "_file": "01_architect.json",
+  "_written_by": "kmp-architect",
+  "_timestamp": "2026-04-07T13:45:00Z",
+  "_status": "success",
+  "_reads": ["00_workflow.json"],
+  "summary": "Architecture design for Hiển thị Cảm biến Nhiệt độ",
+  "outputs": {
+    "module_plan": {
+      "shared_additions": [
+        "shared/src/commonMain/kotlin/caonguyen/vu/models/SensorData.kt",
+        "shared/src/commonMain/kotlin/caonguyen/vu/network/ApiRoutes.kt"
+      ],
+      "server_additions": [
+        "server/src/main/kotlin/caonguyen/vu/routes/SensorRoutes.kt",
+        "server/src/main/kotlin/caonguyen/vu/database/tables/SensorTable.kt"
+      ],
+      "iot_additions": [
+        "server/src/main/kotlin/caonguyen/vu/iot/mqtt/TemperatureSubscriber.kt"
+      ],
+      "compose_additions": [
+        "composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/TemperatureScreen.kt",
+        "composeApp/src/commonMain/kotlin/caonguyen/vu/ui/dashboard/TemperatureViewModel.kt"
+      ]
+    },
+    "api_contracts": [
+      {
+        "method": "GET",
+        "path": "/api/sensors/temperature/latest",
+        "response": { "deviceId": "String", "temperature": "Double", "humidity": "Double", "timestamp": "Long" }
+      },
+      {
+        "method": "GET",
+        "path": "/api/sensors/temperature/history",
+        "response": "[SensorData]"
+      }
+    ],
+    "adrs": [],
+    "koin_modules_needed": [
+      "TemperatureViewModel module",
+      "SensorRepository module"
+    ]
+  },
+  "files_created": [],
+  "files_modified": [],
+  "blockers": [],
+  "next_agents": ["kmp-shared", "kmp-iot", "kmp-ktor-backend", "kmp-compose"],
+  "_fda": {
+    "doc_refs": ["SRS-001", "SDD-001"],
+    "sdd_created": "docs/SDD/SDD-002_hien-thi-cam-bien-nhiet-do.md",
+    "srs_addendum": "docs/SRS/SRS-002_hien-thi-cam-bien-nhiet-do.md",
+    "requirements_implemented": [
+      "REQ-N002",
+      "REQ-B006",
+      "REQ-B007",
+      "REQ-U002"
+    ],
+    "soups_introduced": [],
+    "risks": [
+      {
+        "risk_id": "RISK-009",
+        "hazard": "MQTT data payload bị giả mạo (Data Injection/Tampering)",
+        "severity": "High",
+        "likelihood": "Possible",
+        "control": "Implement data validation logic before saving to database (e.g. range check: temp -50 to 100)",
+        "req_ref": "REQ-N001"
+      },
+      {
+        "risk_id": "RISK-010",
+        "hazard": "Network chập chờn mất dữ liệu cảm biến",
+        "severity": "Medium",
+        "likelihood": "Likely",
+        "control": "Sử dụng QoS 1 trong MQTT Subscriber để đảm bảo delivery, app Compose handle timeout/error state",
+        "req_ref": "REQ-B008"
+      }
+    ],
+    "adrs_created": []
+  }
+}

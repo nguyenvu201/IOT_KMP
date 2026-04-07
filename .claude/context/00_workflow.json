@@ -2,12 +2,12 @@
   "_schema": "kmp-workflow/v2",
   "_file": "00_workflow.json",
   "_written_by": "kmp-orchestrator",
-  "_timestamp": "2026-04-07T12:56:06.957607Z",
+  "_timestamp": "2026-04-07T13:43:39.233151Z",
   "workflow": {
-    "name": "sensor-dashboard",
-    "feature": "Real-time sensor dashboard",
+    "name": "Hiển thị Cảm biến Nhiệt độ",
+    "feature": "Lấy data MQTT từ esp8266 hiển thị lên app Compose thông qua backend Ktor",
     "status": "started",
-    "started_at": "2026-04-07T12:56:06.957736Z",
+    "started_at": "2026-04-07T13:43:39.233298Z",
     "completed_at": null
   },
   "tech_stack": {

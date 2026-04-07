@@ -1,6 +1,6 @@
 # Architecture Overview
 
-> **Updated**: 2026-04-07 13:04 UTC
+> **Updated**: 2026-04-07 13:48 UTC
 
 ## Module Structure
 

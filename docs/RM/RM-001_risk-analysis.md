@@ -207,6 +207,35 @@ Tài liệu này là **master risk register** cho hệ thống KMP IoT. Mỗi ha
 
 ---
 
+
+### RISK-009 — (Feature: Hiển thị Cảm biến Nhiệt độ)
+
+| Field | Value |
+|-------|-------|
+| **Risk ID** | RISK-009 |
+| **Hazard** | MQTT data payload bị giả mạo (Data Injection/Tampering) |
+| **Severity** | High |
+| **Likelihood** | Possible |
+| **Control** | Implement data validation logic before saving to database (e.g. range check: temp -50 to 100) |
+| **REQ Ref** | REQ-N001 |
+| **Status** | Open |
+
+---
+
+### RISK-010 — (Feature: Hiển thị Cảm biến Nhiệt độ)
+
+| Field | Value |
+|-------|-------|
+| **Risk ID** | RISK-010 |
+| **Hazard** | Network chập chờn mất dữ liệu cảm biến |
+| **Severity** | Medium |
+| **Likelihood** | Likely |
+| **Control** | Sử dụng QoS 1 trong MQTT Subscriber để đảm bảo delivery, app Compose handle timeout/error state |
+| **REQ Ref** | REQ-B008 |
+| **Status** | Open |
+
+---
+
 ## 5. Risk Update Log
 
 | Date | Risk ID | Change | Changed By |
@@ -216,3 +245,4 @@ Tài liệu này là **master risk register** cho hệ thống KMP IoT. Mỗi ha
 ---
 *Document: RM-001 | Standard: IEC 62304 §7, ISO 14971 §4*  
 *Auto-updated by `doc_generator.py --risk` after each security review*
+| 2026-04-07 | New risks from `Hiển thị Cảm biến Nhiệt độ` | kmp-architect |
